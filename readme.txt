@@ -18,3 +18,5 @@ xiaoshuai is a zhu.
 xiaoshuai is a big zhu.
 
 Creating a branch is qiuck.
+
+Creatint a new branch 'feature1'.
