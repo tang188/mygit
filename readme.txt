@@ -16,3 +16,5 @@ add two lines context.
 
 xiaoshuai is a zhu.
 xiaoshuai is a big zhu.
+
+Creating a branch is qiuck.
