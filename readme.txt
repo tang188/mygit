@@ -26,3 +26,5 @@ Creatint a new branch is qiuck and simple.
 >>>>>>> feature1
 
 xiugaiqian.
+
+bug.
