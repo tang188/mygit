@@ -19,12 +19,16 @@ xiaoshuai is a big zhu.
 
 Creating a branch is qiuck.
 
-<<<<<<< HEAD
+
 Creating a new branch is qiuck and simple.
-=======
+
 Creatint a new branch is qiuck and simple.
->>>>>>> feature1
+
 
 xiugaiqian.
 
+
 fix bug.
+
+bug.
+
