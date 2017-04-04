@@ -1,0 +1,96 @@
+	Stage（工作区） 
+一、查看日志
+	1.git log //详细的信息
+	2.git log --pretty=oneline //在一行显示log信息，格式好，方便查看
+	
+二、版本回退
+	1.git reset --hard HEAD^ //一个^代表一个版本，多个版本前可以不停加^
+	2.git reset --hard HEAD~count //太多版本可以用~加数字返回数字对应的版本
+
+三、添加文件
+	1.git add file //要加文件类型（.txt）,添加到stage缓存区
+	2.git commit -m "提交内容" //提交到版本库
+
+四、撤销修改
+	1.git checkout -- file //当文件还没还有提交到stage时可以用这个撤回
+	2.git reset HEAD file //当文件已经提交到stage但是还没还有commit的时候可以用这个命令撤回修改
+	3.当文件已经提交到版本库时，可以用撤回上个版本的方法撤销修改。
+
+五、删除文件
+	1.git rm file //删除文件
+	2.误删时可以用git checkout -- file //撤回删除
+	
+（注）git checkout -- file //实际上是用版本的版本替换工作区的版本
+
+六、克隆仓库
+	1.git clone git@github.com:tang188/cloneTest.git //后面加git在github里的下载链接
+七、分支
+	1.git branch //查看分支
+	2.git branch <name> //创建分支
+	3.git checkout name //切换分支
+	4.git checkout -b name //创建和切换分支
+	5.git  merge name //合并分支到当前分支
+	6.git branch -d name //删除分支
+	分支冲突
+		1.修正冲突再提交合并。
+	
+	分支策略
+	合并分支时，用git merge --no-ff -m "合并内容" name
+		1.master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活.		2.干活都是在dev分支上进行的，dev分支时不稳定的，要发布版本时，把dev合并到master上，在master上发布版本。	3.码农都是在dev分支上活动，每个人都有自己的分支，偶尔往dev分支上合并更新就可以。		
+	Bug分支
+		1.git stash 保存当前工作现场
+		2.返回master分支，创建bug分支
+		3.解决bug后返回master分支,删除bug分支
+		4.git stash list //查看保存的工作现场
+		5.git stash pop //恢复工作现场，同时删除工作现场
+		6.git stash apply stash@{0} //恢复第一个工作现场，要手动删除工作现场
+		7.git stash drop stash@{0}//删除工作现场
+	
+	Feature分支
+		开发新功能最好是新建一个feature分支
+			1.git branch -d name //销毁分支
+			2.git branch -D name 强行销毁
+			
+	多人协作
+		1.git remote //查看远程库的信息
+		2.git remote -v //查看远程库的详细信息(显示可以抓取或者推送的origin的地址)
+		3.git push origin master //推送master到远程库上（时刻和远程库同步）
+		3.git push origin dev //推送dev到远程库上（一般也要同步）
+		4.git clone SSH-key //克隆远程仓库
+		5.git checkout -b dev origin/dev //在本地创建和远程origin的dev相连接的dev分支
+		6.完成后就可以直接push上远程库
+		7.若push失败：git pull 抓取最新版本
+		8.抓取失败，先要本地dev和远程库的dev链接起来：git branch --set-upstream dev origin/dev
+		9.git pull //拉取
+		10.修改冲突后再提交就可以了。
+		11.push 到远程库
+八、标签管理
+	创建标签
+		1.git tag name(V1.0) //新建标签，默认为HEAD，也可以指定commit id。
+		2.git tag -a <tagName> -m "blablabla" //指定标签信息
+		3.git tag -s <tagName> -m "blablabla" //用PGP签名标签
+		4.git tag //查看所有的标签
+		5.git show <name>(V1.0) //查看标签的详细信息
+	操作标签
+		1.git push origin <tagname> //推送一个本地标签
+		2.git push origin --tags //推送所有的标签
+		3.git tag -d <tagName> //删除一个本地标签
+		4.git push origin  :refs/tags/<tagName> //删除一个远程标签
+	（注：删除远程标签时，要先删除本地的标签）
+九、使用GitHub
+	1.多人参与同一项目时，现有源github中fork项目到自己的github账户下。
+	2.再clone项目到本地中，操作的代码上交。
+	3.如果要贡献代码，可以在自己GitHub中pull request推送给官方
+十、自定义git
+	忽略特殊文件
+		1.git config --global color.ui true //让git显示颜色
+		2.touch .gitignore //在工程目录创建.gitignore文件
+		3.vim .gitignore //编辑gitignore文件	4.按ESC退出编辑模式，然后按shift+;,再输入q!(不保存)或者wq!(保存)
+		5.提交.gitignore文件，（add ，commi）
+		6.git add -f <name> //强制提交已经忽略的文件
+		7.git check-ignore -v <filename> //检查是什么地方限制了文件的提交
+	配置别名
+		1.git config --global alias.<别名> status //用别名内容代替status
+		2.git config --global alias.<别名> 'reset HEAD'
+		3.--global 是针对当前用户起作用，如果不加，只针对当前仓库起作用
+		4.单个仓库配置文件放在.git/config文件中，用户配置文件在用户目录下的.gitconfig文件中
