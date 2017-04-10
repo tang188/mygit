@@ -1,0 +1,23 @@
+（1）安装SonarLint和findbug插件，使用这些插件优化项目代码
+（2）创建java项目，参考以下数据表的定义，实现针对这些表的数据操作。合理的分层（解耦），数据访问层使用Set或List等数据结构模拟数据库存储。
+(3)
+create table user(
+    id bigint primary key,
+    name varchar(20) not null unique,
+    sex char(1) not null,
+    birth_date date,
+    height decimal
+);
+
+create table contact_book(
+    id bigint primary key,
+    user_id bigint not null,
+    type int not null,
+    contact varchar(255) not null,
+    constraint foreign key fk_user(user_id) references user(id)
+)
+（4）参考资料：
+http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
+http://www.sonarlint.org/eclipse/index.html
+http://findbugs.sourceforge.net/
+The Clean Code(1-7章)
