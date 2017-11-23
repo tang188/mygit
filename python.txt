@@ -4,3 +4,7 @@
 name = "tang"
 age = 10
 print(name)
+#编辑工具pycharm
+
+#https://pypi.python.org/pypi
+#发开框架
