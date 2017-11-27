@@ -38,3 +38,13 @@ move (3, 'a', 'b', 'c')
 
 File对象方法：file对象提供了操作文件的一系列方法
 OS对象方法：提供了处理文件及目录的一系列方法 （需导入OS模块：import os）
+
+file = open("fileName","accessMod")
+file.flush()
+file.read()
+file.write()
+file.readLine()
+
+file.tell()//获取文件当前位置
+file.seek()//设置文件当前位置
+file.truncate()//截取文件
