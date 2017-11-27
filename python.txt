@@ -36,3 +36,5 @@ def move(n, a, b, c):
 move (3, 'a', 'b', 'c')
 '''
 
+File对象方法：file对象提供了操作文件的一系列方法
+OS对象方法：提供了处理文件及目录的一系列方法 （需导入OS模块：import os）
