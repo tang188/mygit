@@ -11,3 +11,32 @@
     5.$方式一般用于传入数据库对象，例如传入表名.
     6.一般能用#的就别用$.
     MyBatis排序时使用order by 动态参数时需要注意，用$而不是#
+    
+3.把list当成参传进存储过程
+--定义一个对应数据类型的Object
+CREATE OR REPLACE TYPE test as object(
+FID NUMBER,  
+NUM nVARCHAR2(30),  
+TESKID NUMBER, 
+CID NUMBER,
+USERCODE nVARCHAR2(100)
+)
+
+--创建一个Object的List类型
+CREATE OR REPLACE TYPE test_list as table of test
+
+
+CREATE OR REPLACE PROCEDURE inserttenumber(
+                       v_rec_class_list    IN test_list)is
+    v_rec_class test;
+    v_count number;
+begin
+    v_count := v_rec_class_list.count;
+    for i in 1..v_count 
+       loop 
+          v_rec_class:=v_rec_class_list(i);
+          insert into te_number(id,fid,NUM,teskid,STATE,cid,user_code)
+		  values(tenumberseq.nextval,v_rec_class.fid,v_rec_class.NUM,v_rec_class.teskid,'-2',v_rec_class.cid,v_rec_class.USERCODE); 
+           
+       end loop;
+end inserttenumber;
